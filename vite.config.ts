@@ -2,10 +2,13 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(), // Adicionado aqui
-  ],
-})
+export default defineConfig(({ command, mode }) => {
+  const isProd = mode === 'production' || process.env.NODE_ENV === 'production';
+  return {
+    base: isProd ? '/Us-valentine-s-day/' : '/',
+    plugins: [
+      react(),
+      tailwindcss(),
+    ],
+  };
+});
